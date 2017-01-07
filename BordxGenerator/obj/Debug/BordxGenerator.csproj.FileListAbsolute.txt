@@ -1,0 +1,9 @@
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\bin\Debug\BordxGenerator.exe.config
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\bin\Debug\BordxGenerator.exe
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\bin\Debug\BordxGenerator.pdb
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\bin\Debug\ClosedXML.dll
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\bin\Debug\ClosedXML.xml
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\obj\Debug\BordxGenerator.exe
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\obj\Debug\BordxGenerator.pdb
+C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerator\obj\Debug\BordxGenerator.csprojResolveAssemblyReference.cache
