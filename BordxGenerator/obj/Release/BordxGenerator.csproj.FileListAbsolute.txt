@@ -9,9 +9,3 @@ C:\Users\Agent\Documents\Visual Studio 2015\Projects\BordxGenerator\BordxGenerat
 C:\Users\Agent\Documents\Visual Studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\bin\Release\BordxGenerator.exe.config
 C:\Users\Agent\Documents\Visual Studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\obj\Release\BordxGenerator.exe
 C:\Users\Agent\Documents\Visual Studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\obj\Release\BordxGenerator.pdb
-C:\Users\Agent\Documents\visual studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\bin\Release\BordxGenerator.exe
-C:\Users\Agent\Documents\visual studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\bin\Release\BordxGenerator.pdb
-C:\Users\Agent\Documents\visual studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\bin\Release\ClosedXML.dll
-C:\Users\Agent\Documents\visual studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\bin\Release\DocumentFormat.OpenXml.dll
-C:\Users\Agent\Documents\visual studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\bin\Release\ClosedXML.xml
-C:\Users\Agent\Documents\visual studio 2015\Projects\mibrk-bdx-generator\BordxGenerator\obj\Release\BordxGenerator.csprojResolveAssemblyReference.cache
