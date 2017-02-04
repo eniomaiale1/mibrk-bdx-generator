@@ -16,7 +16,7 @@ namespace BordxGenerator
         static string fileTemplate = Path.GetFullPath(Properties.Settings.Default.BDXClaimTemplate);
         static string fileReports = Properties.Settings.Default.BDXClaimReports.EndsWith("\\") ? Properties.Settings.Default.BDXClaimReports : Properties.Settings.Default.BDXClaimReports + "\\";
 
-        static bool PrepareFile(string fileName, DateTime dateProcess) {
+        static bool PrepareFile(string fileName, DateTime dateProcess, bool monthly = false) {
             string workSheetName = dateProcess.ToString("yyyy-MM");
             string fileContex = fileReports + fileName + ".xlsx";
             XLWorkbook wbTemplate;
@@ -31,7 +31,7 @@ namespace BordxGenerator
                 return false;
             }
 
-            if (!File.Exists(fileContex)) {
+            if (!File.Exists(fileContex) || monthly) {
                 wsTemplate.Name = workSheetName;
                 wbTemplate.SaveAs(fileReports + fileName + ".xlsx");
                 return true;
@@ -163,10 +163,11 @@ namespace BordxGenerator
                     
                     periodData.AddRange(fees.Where(c => c.DateFeesPaid <= last && c.DateFeesPaid >= first && c.DateFeesPaid <= p.To && c.DateFeesPaid >= p.From));
                     string fileName = p.From.ToString("yyyyMMdd") + "-" + p.To.ToString("yyyyMMdd");
-
-                    if (periodData.Count > 0 && PrepareFile(fileName, first))
+                    string fileNameMonthly = fileName + "-" + first.Month.ToString();
+                    if (periodData.Count > 0 && PrepareFile(fileName, first) && PrepareFile(fileNameMonthly, first, true))
                     {
                         ProcessData(periodData, fileName, first, last, p);
+                        ProcessData(periodData, fileNameMonthly, first, last, p);
                     }
                 }
 
