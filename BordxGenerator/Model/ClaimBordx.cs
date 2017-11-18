@@ -11,6 +11,8 @@ namespace BordxGenerator.Model
         public string InsuredId { get; set; }
         public string Insured { get; set; }
         public Address Address { get; set; }
+        public Address FLAddress { get; set; }
+        public string ClaimantId { get; set; }
         public string Claimant { get; set; }
         public string PolicyNumber { get; set; }
         public DateTime EffectiveDate { get; set; }

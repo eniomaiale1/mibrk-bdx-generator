@@ -77,14 +77,14 @@ namespace BordxGenerator
             {
 
                 worksheet.Cell("A" + line).SetValue(claim.Insured);
-                worksheet.Cell("B" + line).SetValue(claim.Address.Line1);
-                worksheet.Cell("C" + line).SetValue(claim.Address.Zip);
+                worksheet.Cell("B" + line).SetValue(claim.FLAddress == null ? "" : claim.FLAddress.Line1);
+                worksheet.Cell("C" + line).SetValue(claim.FLAddress == null ? "" : claim.FLAddress.Zip);
                 worksheet.Cell("D" + line).SetValue(claim.Claimant);
-                worksheet.Cell("E" + line).SetValue(claim.Address.Line1);
-                worksheet.Cell("F" + line).SetValue(claim.Address.Zip);
+                worksheet.Cell("E" + line).SetValue(claim.FLAddress == null ? "" : claim.FLAddress.Line1);
+                worksheet.Cell("F" + line).SetValue(claim.FLAddress == null ? "" : claim.FLAddress.Zip);
                 worksheet.Cell("G" + line).SetValue(claim.PolicyNumber);
-                worksheet.Cell("H" + line).SetValue(claim.Address.State);
-                worksheet.Cell("I" + line).SetValue(claim.Address.Country);
+                worksheet.Cell("H" + line).SetValue(claim.FLAddress == null ? "" : claim.FLAddress.State);
+                worksheet.Cell("I" + line).SetValue(claim.FLAddress == null ? "" : claim.FLAddress.County);
                 worksheet.Cell("J" + line).SetValue(claim.EffectiveDate == DateTime.MinValue ? "" : claim.EffectiveDate.ToShortDateString());
                 worksheet.Cell("K" + line).SetValue(claim.ExpirationDate == DateTime.MinValue ? "" : claim.ExpirationDate.ToShortDateString());
                 worksheet.Cell("L" + line).SetValue(claim.Year);

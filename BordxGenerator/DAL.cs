@@ -50,12 +50,12 @@ namespace BordxGenerator
 
         }
 
-        public static Address GetAddress(string insuredId) {
+        public static Address GetAddress(string insuredId, string typeId = "1") {
             Address address = new Address();
 
-            string query = "SELECT Direcciones.Direccion, Direcciones.Ciudad, Direcciones.Estado, Direcciones.[Codigo Potal], [Monedas Paises].Pais " +
+            string query = "SELECT Direcciones.Direccion, Direcciones.Ciudad, Direcciones.Estado, Direcciones.[Codigo Potal], [Monedas Paises].Pais, [Direcciones].County " +
                             "FROM Direcciones INNER JOIN[Monedas Paises] ON Direcciones.[Pais ID] = [Monedas Paises].[Pais ID] "+ 
-                            "WHERE(((Direcciones.[Asegurado ID])=" + insuredId + ") AND((Direcciones.[Tipo de Direccion ID])=1));";
+                            "WHERE(((Direcciones.[Asegurado ID])=" + insuredId + ") AND((Direcciones.[Tipo de Direccion ID])="+ typeId + "));";
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             OleDbDataAdapter adapter = new OleDbDataAdapter(query, conn);
@@ -68,6 +68,7 @@ namespace BordxGenerator
                 address.State = row["Estado"].ToString();
                 address.Zip = row["Codigo Potal"].ToString();
                 address.Country = row["Pais"].ToString();
+                address.County = row["County"].ToString();
             }
             return address;
 
@@ -78,7 +79,7 @@ namespace BordxGenerator
             List<ClaimBordx> reportData = null;
             if (DAL.OpenConnection())
             {
-                string query = "SELECT Asegurados.[Asegurado ID], Asegurados.Apellidos, Asegurados.Nombres, Asegurados_1.Apellidos as ClaimantLastName, Asegurados_1.Nombres as ClaimantName, " +
+                string query = "SELECT Asegurados.[Asegurado ID], Asegurados.Apellidos, Asegurados.Nombres, Asegurados_1.[Asegurado ID] as ClaimantId,Asegurados_1.Apellidos as ClaimantLastName, Asegurados_1.Nombres as ClaimantName, " +
                 "Status_1.[Numero Poliza], Status_1.[Fecha Desde], Status_1.[Fecha Hasta], Reclamos.[Numero del Reclamo], Worksheets.[Numero del Worksheet], " +
                 "Diagnosticos.[ICD 9 Code], Diagnosticos.Diagnostico, Worksheets.[Fecha del Worksheet], [Pagos de Reclamos].[Fecha de Pago], " +
                 "Min([Detalle de los Worksheets].[Fecha del Servicio]) AS [MinOfFecha del Servicio], " +
@@ -93,7 +94,7 @@ namespace BordxGenerator
                 "INNER JOIN Monedas ON[Detalle de los Worksheets].[Moneda ID] = Monedas.[Moneda ID] " +
                 "WHERE ((([Pagos de Reclamos].[Fecha de Pago]) Between #" + from.ToString("MM/dd/yyyy") + "# And #" + to.ToString("MM/dd/yyyy") + "#)) " +
                 "GROUP BY Asegurados.[Asegurado ID], Asegurados.Apellidos, Asegurados.Nombres, " +
-                "Asegurados_1.Apellidos, Asegurados_1.Nombres, Status_1.[Numero Poliza], Status_1.[Fecha Desde], Status_1.[Fecha Hasta], Reclamos.[Numero del Reclamo], " +
+                "Asegurados_1.[Asegurado ID], Asegurados_1.Apellidos, Asegurados_1.Nombres, Status_1.[Numero Poliza], Status_1.[Fecha Desde], Status_1.[Fecha Hasta], Reclamos.[Numero del Reclamo], " +
                 "Worksheets.[Numero del Worksheet], Diagnosticos.[ICD 9 Code], Diagnosticos.Diagnostico, Worksheets.[Fecha del Worksheet], " +
                 "[Pagos de Reclamos].[Fecha de Pago], [Monedas Paises].Pais, Monedas.Simbolo, [Pagos de Reclamos].[Fecha de Pago], Worksheets.[Monto Cliente], " +
                 "Worksheets.[Monto Cubierto] "+
@@ -112,8 +113,10 @@ namespace BordxGenerator
                     {
                         ClaimBordx claim = new ClaimBordx();
                         claim.Address = new Address();
+                        claim.FLAddress = new Address();
                         claim.InsuredId = row["Asegurado ID"].ToString();
                         claim.Insured = row["Apellidos"].ToString() + " " + row["Nombres"].ToString();
+                        claim.ClaimantId = row["ClaimantId"].ToString();
                         claim.Claimant = row["ClaimantLastName"].ToString() + " " + row["ClaimantName"].ToString();
                         claim.PolicyNumber = row["Numero Poliza"].ToString();
 
@@ -142,8 +145,11 @@ namespace BordxGenerator
                 }
 
                 foreach (ClaimBordx claim in reportData) {
-                    claim.Address = GetAddress(claim.InsuredId);
+                    claim.Address = GetAddress(claim.ClaimantId);
+                    claim.FLAddress = GetAddress(claim.ClaimantId, "2");
                 }
+
+
                 DAL.CloseConnection();
             }
             return reportData;
